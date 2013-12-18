@@ -33,7 +33,17 @@ class NxOperationParamValue implements Comparable<NxOperationParamValue> {
 
   String get dataType => _param.type;
 
-  String get widget => (_param.widget == null) ? "text" : _param.widget;
+  String get widget {
+    if (_param.widget == null) {
+      if (_param.type == "boolean") {
+        return "checkbox";    
+      } else {
+        return "text";
+      }
+    } else {
+      return _param.widget;
+    }     
+  }
 
   bool get required => _param.isRequired;
 

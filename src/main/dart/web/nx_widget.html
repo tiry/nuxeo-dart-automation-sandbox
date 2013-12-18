@@ -24,6 +24,9 @@
             <div>Size: {{value.length | asFileSize}}.</div>
           </div>
         </template>
+        <template if="{{type == 'checkbox'}}">
+           <input id="widget"  type="checkbox" checked="{{value}}">  
+        </template>
          <template if="{{type == 'Option'}}">                      
             <select id="widget" value="{{value}}">
                 <option template repeat="{{v in values}}">{{v}}</option>
