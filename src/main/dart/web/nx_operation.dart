@@ -37,6 +37,8 @@ class NxOperationParamValue implements Comparable<NxOperationParamValue> {
     if (_param.widget == null) {
       if (_param.type == "boolean") {
         return "checkbox";    
+      } if (_param.type == "stringlist") {
+        return "stringlist";    
       } else {
         return "text";
       }
@@ -114,11 +116,11 @@ class NXOperation extends PolymerElement {
   void callOp(evt) {
     evt.preventDefault(); // don't submit the form
 
-    var valid = shadowRoot.querySelectorAll("nx-widget").every((_) => _.input.validity.valid);
+    //var valid = shadowRoot.querySelectorAll("nx-widget").every((_) => (_.input.validity _.input.validity.valid);
 
-    if (!valid) {
+    /*if (!valid) {
       return;
-    }
+    }*/
 
     // Clear previous results and errors
     var container = shadowRoot.querySelector("#result");
@@ -129,6 +131,7 @@ class NXOperation extends PolymerElement {
     var opParams = {};
     params.forEach((param) {
       opParams[param.name] = param.value;
+      print(param.name  + " --> " + param.value.toString());
     });
 
     // Call the op

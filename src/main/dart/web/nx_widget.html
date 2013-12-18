@@ -32,12 +32,21 @@
                 <option template repeat="{{v in values}}">{{v}}</option>
             </select>   
         </template>
+        <template if="{{type == 'stringlist'}}">
+          <template repeat="{{entry in value}}"> 
+           <div><input id="widget" class="form-control" type="text" value="{{entry}}" style="width:300px;display:inline;padding:2px">
+           &nbsp;<input type="button" data-toremove="{{entry}}" on-click="{{onRemoveEntry}}" value="remove"></div>
+          </template>
+          <br/>                  
+          <input type="button" on-click="{{onAddStringEntry}}" value="add new item">  
+        </template>
+        
         <template if="{{type == null || type == ''}}">
            Unknow widget
         </template>
       </div>
   </template>
   <script type="application/dart" src="nx_widget.dart"></script>
-</polymer-element>
+</polymer-element>  
 </body>
 </html>

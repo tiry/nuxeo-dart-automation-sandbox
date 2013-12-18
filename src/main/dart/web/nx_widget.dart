@@ -18,14 +18,30 @@ class NXWidget extends PolymerElement {
 
   @observable String label = "";
   
-  @observable List<String> values;
-
+  @observable List values = new List();
+  
   bool get applyAuthorStyles => true;
 
   String get widgetTemplate {
     return "nx_text_widget";
   }
 
+  void onAddStringEntry() {
+    if (value.runtimeType.toString()=="Null") {
+      // let's do some dynamic typing !
+      print("reset / change type");
+      value = toObservable([]);
+    }
+    value.add("");
+  }
+
+  void onRemoveEntry(Event evt, var detail, var target) {
+    //int idx = int.parse(target.attributes['data-toremove']);    
+    //value.removeAt(idx);
+    data = target.attributes['data-toremove'];    
+    value.removeAt(data);
+  }
+  
   NXWidget.created() : super.created();
 
   get input => shadowRoot.querySelector("#widget");
@@ -33,7 +49,7 @@ class NXWidget extends PolymerElement {
   /// File handling
 
   get asFileSize => new FileSizeToString();
-
+  
   onFileSelected() {
     File file = input.files[0];
     if (file == null) return;
