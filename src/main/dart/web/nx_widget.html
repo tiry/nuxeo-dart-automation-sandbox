@@ -6,7 +6,7 @@
     <link rel="import" href="nx_widget.html">
   </head>
   <body>
-<polymer-element name="nx-widget" attributes="value,label,type,datatype,required">
+<polymer-element name="nx-widget" attributes="value,label,type,datatype,required,values">
   <template>
       <template if="{{label.isNotEmpty}}">
         <label class="col-sm-4 control-label" for="widget">{{label}}</label>
@@ -23,6 +23,14 @@
           <div hidden?="{{value == null}}">
             <div>Size: {{value.length | asFileSize}}.</div>
           </div>
+        </template>
+         <template if="{{type == 'Option'}}">                      
+            <select id="widget" value="{{value}}">
+                <option template repeat="{{v in values}}">{{v}}</option>
+            </select>   
+        </template>
+        <template if="{{type == null || type == ''}}">
+           Unknow widget
         </template>
       </div>
   </template>

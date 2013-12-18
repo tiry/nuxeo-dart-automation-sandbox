@@ -17,6 +17,8 @@ class NXWidget extends PolymerElement {
   @observable bool required;
 
   @observable String label = "";
+  
+  @observable List<String> values;
 
   bool get applyAuthorStyles => true;
 
